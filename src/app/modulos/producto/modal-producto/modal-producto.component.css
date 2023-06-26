@@ -1,0 +1,19 @@
+.container{
+    display:flex;
+    flex-direction: column;
+}
+
+.container > *{
+    width: 100%;
+}
+
+.input-file{
+    display: none;
+}
+
+.subir{
+    padding: 5px 16px;
+    color: #FFF;
+    background: #3F51B5;
+    border: 0px solid #FFF;
+}
