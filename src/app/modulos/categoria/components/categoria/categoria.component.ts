@@ -6,6 +6,7 @@ import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule} from '@angul
 import { NewCategoriaComponent } from '../new-categoria/new-categoria.component';
 import { ConfirmComponent } from 'src/app/modulos/shared/components/confirm/confirm.component';
 import { MatPaginator } from '@angular/material/paginator';
+import { UtilService } from 'src/app/modulos/shared/services/util.service';
 
 
 @Component({
@@ -15,12 +16,16 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CategoriaComponent implements OnInit {
 
+  isAdmin!: boolean;
+
   constructor(private categoriaService: CategoriaService, 
               public dialog: MatDialog,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private util: UtilService) { }
 
   ngOnInit(): void {
     this.listaCategorias();
+    this.isAdmin = this.util.isAdmin();
   }
 
   displayedColumns: string[] = ['id','nombre','descripcion','acciones'];

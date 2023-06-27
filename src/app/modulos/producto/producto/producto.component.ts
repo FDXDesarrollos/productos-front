@@ -6,6 +6,7 @@ import { ConfirmComponent } from 'src/app/modulos/shared/components/confirm/conf
 import { MatPaginator } from '@angular/material/paginator';
 import { ModalProductoComponent } from '../modal-producto/modal-producto.component';
 import { ProductoService } from './../../shared/services/producto.service';
+import { UtilService } from 'src/app/modulos/shared/services/util.service';
 
 //American Team
 // 52 55 7276 9333
@@ -17,12 +18,16 @@ import { ProductoService } from './../../shared/services/producto.service';
 })
 export class ProductoComponent implements OnInit {
 
+  isAdmin!: boolean;
+
   constructor(private productoService: ProductoService,
               public dialog: MatDialog,
-              private snackBar: MatSnackBar) { }
+              private snackBar: MatSnackBar,
+              private util: UtilService) { }
 
   ngOnInit(): void {
     this.listaProductos();
+    this.isAdmin = this.util.isAdmin();
   }
 
   displayedColumns: string[] = ['id', 'nombre', 'precio', 'cantidad', 'categoria', 'imagen', 'acciones'];

@@ -6,6 +6,9 @@ import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { CategoriaModule } from '../categoria/categoria.module';
 import { ProductoModule } from '../producto/producto.module';
+import { MaterialModule } from '../shared/meterial.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -18,7 +21,10 @@ import { ProductoModule } from '../producto/producto.module';
     RouterModule,
     SharedModule,
     CategoriaModule,
-    ProductoModule
+    ProductoModule,
+    MaterialModule,
+    FlexLayoutModule,
+    NgChartsModule
   ]
 })
 export class DashboardModule { }

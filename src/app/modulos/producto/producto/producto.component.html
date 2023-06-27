@@ -64,7 +64,7 @@
                         <mat-icon aria-label="Editar" (click)="editar(element.id, element.nombre, element.precio, element.cantidad, element.categoria)">edit</mat-icon>
                     </button>
                     
-                    <button mat-icon-button color="warn">
+                    <button *ngIf="isAdmin" mat-icon-button color="warn">
                         <mat-icon aria-label="Eliminar" (click)="eliminar(element.id)">delete</mat-icon>
                     </button>
                 </td>

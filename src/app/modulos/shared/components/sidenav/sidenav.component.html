@@ -5,7 +5,7 @@
             <mat-icon>menu</mat-icon>
         </button>
 
-        <h1 class="app-name">D-Inventario</h1>
+        <h1 class="app-name">D-Productos</h1>
 
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
@@ -20,7 +20,7 @@
                     </button>
 
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>
+                        <button mat-menu-item (click)="logout()">
                             <mat-icon>exit_to_app</mat-icon>
                             Cerrar Sesión
                         </button>
@@ -38,8 +38,8 @@
             <mat-nav-list>
                 <div class="profile-card">
                     <div class="header">
-                        <h2>Alfredo Leal</h2>
-                        <h4>alfredoleal@gmail.com</h4>
+                        <h2>{{ userName }}</h2>
+                        <!-- <h4>alfredoleal@gmail.com</h4> -->
                     </div>
                 </div>
 
