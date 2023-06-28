@@ -88,57 +88,72 @@ export class ProductoComponent implements OnInit {
         this.openSnackBar("Error al registrar", "Error");
       }
     });
-}
-
-openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar>{
-  return this.snackBar.open(message, action, {duration:3000});
-}
-
-editar(id: number, nombre: string, precio: number, cantidad: number, categoria: number){
-  const dialogRef = this.dialog.open(ModalProductoComponent, {
-    width: '450px',
-    data: {id: id, nombre: nombre, precio: precio, cantidad: cantidad, categoria: categoria}
-  });
-
-  dialogRef.afterClosed().subscribe((result:any) => {
-    if(result == 1){
-      this.openSnackBar("Información actualizada", "Exito");
-      this.listaProductos();
-    }
-    else if(result == 2){
-      this.openSnackBar("Error al actualizar", "Error");
-    }
-  });    
-}
-
-eliminar(id:number){
-  const dialogRef = this.dialog.open(ConfirmComponent, {
-    data: {id: id, modulo: "producto"}
-  });
-
-  dialogRef.afterClosed().subscribe((result:any) => {
-    if(result == 1){
-      this.openSnackBar("Información eliminada", "Exito");
-      this.listaProductos();
-    }
-    else if(result == 2){
-      this.openSnackBar("Error al eliminar", "Error");
-    }
-  });      
-}
-
-buscar(termino:string){
-  if(termino.length === 0){
-    return this.listaProductos();
   }
-  else{
-    this.productoService.buscarProducto(termino)
-    .subscribe((resp:any) => {
-      this.procesaProductos(resp);
+
+  openSnackBar(message: string, action: string): MatSnackBarRef<SimpleSnackBar>{
+    return this.snackBar.open(message, action, {duration:3000});
+  }
+
+  editar(id: number, nombre: string, precio: number, cantidad: number, categoria: number){
+    const dialogRef = this.dialog.open(ModalProductoComponent, {
+      width: '450px',
+      data: {id: id, nombre: nombre, precio: precio, cantidad: cantidad, categoria: categoria}
     });
-  }
-}  
 
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1){
+        this.openSnackBar("Información actualizada", "Exito");
+        this.listaProductos();
+      }
+      else if(result == 2){
+        this.openSnackBar("Error al actualizar", "Error");
+      }
+    });    
+  }
+
+  eliminar(id:number){
+    const dialogRef = this.dialog.open(ConfirmComponent, {
+      data: {id: id, modulo: "producto"}
+    });
+
+    dialogRef.afterClosed().subscribe((result:any) => {
+      if(result == 1){
+        this.openSnackBar("Información eliminada", "Exito");
+        this.listaProductos();
+      }
+      else if(result == 2){
+        this.openSnackBar("Error al eliminar", "Error");
+      }
+    });      
+  }
+
+  buscar(termino:string){
+    if(termino.length === 0){
+      return this.listaProductos();
+    }
+    else{
+      this.productoService.buscarProducto(termino)
+      .subscribe((resp:any) => {
+        this.procesaProductos(resp);
+      });
+    }
+  }  
+
+  exportExcel(){
+      this.productoService.exportProductos().subscribe((data:any) => {
+        let file = new Blob([data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+        let fileUrl = URL.createObjectURL(file);
+        var anchor = document.createElement("a");
+        anchor.download = "productoss.xlsx";
+        anchor.href = fileUrl;
+        anchor.click();
+
+        this.openSnackBar("Archivo exportado correctamente", "Exito");
+      },
+      (error: any) => {
+        this.openSnackBar("Error al exportar archivo", "Error");
+      });
+  }
 
 }
 

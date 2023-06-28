@@ -36,4 +36,9 @@ export class CategoriaService {
     return this.http.get(endpoint);
   }
 
+  exportCategorias(){
+    const endpoint = `${base_url}/categorias/export/excel`;
+    return this.http.get(endpoint, {responseType: 'blob'});
+  }
+
 }
